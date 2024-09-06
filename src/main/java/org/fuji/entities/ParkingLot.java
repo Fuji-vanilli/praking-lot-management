@@ -1,12 +1,12 @@
 package org.fuji.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Data
 public class ParkingLot {
@@ -63,6 +63,19 @@ public class ParkingLot {
                 }
             }
         }
+    }
+
+    public int getNumberOfOpenSlots(String type) {
+        AtomicInteger count= new AtomicInteger();
+        slots.forEach(floors-> {
+            floors.forEach(slot -> {
+                if (Objects.isNull(slot.getVehicle()) && slot.getType().equals(type)) {
+                    count.getAndIncrement();
+                }
+            });
+        });
+
+        return count.get();
     }
 }
 
