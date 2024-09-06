@@ -39,11 +39,30 @@ public class ParkingLot {
                 }
             }
         }
+
+        System.out.println("No slot available for the moment!");
         return "";
     }
 
     private String generateTicketId(int floorNumber, int slotNumber) {
         return parkingLotId+"_"+floorNumber+"_"+slotNumber;
+    }
+
+    public void unPark(String ticketId) {
+        String[] extract = ticketId.split("_");
+        int floorIndex= Integer.parseInt(extract[1])- 1;
+        int slotIndex= Integer.parseInt(extract[2])- 1;
+
+        for (int i= 0; i< slots.size(); i++) {
+            for (int j= 0; j< slots.get(i).size(); j++) {
+                if (i== floorIndex && j== slotIndex) {
+                    Slot slot = slots.get(i).get(j);
+                    slot.setVehicle(null);
+                    slot.setTicketId(null);
+                    System.out.println("Unparked vehicle successfully");
+                }
+            }
+        }
     }
 }
 
