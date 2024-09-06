@@ -25,6 +25,11 @@ public class ParkingLot {
             }
         }
     }
+
+    public String parkVehicle(String type, String regNo, String color) {
+        Vehicle vehicle= new Vehicle(type, regNo, color);
+        return "";
+    }
 }
 
 
