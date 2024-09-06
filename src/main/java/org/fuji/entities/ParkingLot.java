@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Data
@@ -28,7 +29,21 @@ public class ParkingLot {
 
     public String parkVehicle(String type, String regNo, String color) {
         Vehicle vehicle= new Vehicle(type, regNo, color);
+
+        for (int i= 0; i< slots.size(); i++) {
+            for (int j= 0; j< slots.get(i).size(); j++) {
+                Slot slot = slots.get(i).get(j);
+                if (slot.getType().equals(type) && Objects.isNull(slot.getVehicle())) {
+                    slot.setVehicle(vehicle);
+                    slot.setTicketId(generateTicketId(i+1, j+1));
+                }
+            }
+        }
         return "";
+    }
+
+    private String generateTicketId(int floorNumber, int slotNumber) {
+        return parkingLotId+"_"+floorNumber+"_"+slotNumber;
     }
 }
 
