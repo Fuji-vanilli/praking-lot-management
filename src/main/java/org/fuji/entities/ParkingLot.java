@@ -77,6 +77,16 @@ public class ParkingLot {
 
         return count.get();
     }
+
+    public void displayOpenSlots(String type) {
+        for (int i= 0; i< slots.size(); i++)
+            for (int j= 0; j< slots.get(i).size(); j++) {
+                Slot slot = slots.get(i).get(j);
+                if (Objects.isNull(slot.getVehicle()) && slot.getType().equals(type)) {
+                    System.out.println("Floor: "+i+1+" - Slot: "+j+1);
+                }
+            }
+    }
 }
 
 
