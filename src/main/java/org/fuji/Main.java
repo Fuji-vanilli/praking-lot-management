@@ -7,5 +7,10 @@ public class Main {
         ParkingLot parkingLot= new ParkingLot(3, 50);
 
         parkingLot.displayOpenSlots("car");
+        String ticketId = parkingLot.parkVehicle("car", "125", "red");
+
+        System.out.println(ticketId);
+
+        parkingLot.displayOccupiedSlots("car");
     }
 }

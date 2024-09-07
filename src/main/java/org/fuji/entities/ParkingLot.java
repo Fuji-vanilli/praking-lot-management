@@ -2,10 +2,7 @@ package org.fuji.entities;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Data
@@ -18,7 +15,10 @@ public class ParkingLot {
         this.slots= new ArrayList<>();
 
         for (int i= 0; i< numberFloors; i++) {
-            List<Slot> floorSlots= List.of(new Slot("bike"), new Slot("moto"), new Slot("truck"));
+            List<Slot> floorSlots= new ArrayList<>();
+            floorSlots.add(new Slot("bike"));
+            floorSlots.add(new Slot("moto"));
+            floorSlots.add(new Slot("truck"));
 
             slots.add(floorSlots);
             for (int j= 3; j< numberOfSlotPerFloor; j++) {
@@ -36,6 +36,8 @@ public class ParkingLot {
                 if (slot.getType().equals(type) && Objects.isNull(slot.getVehicle())) {
                     slot.setVehicle(vehicle);
                     slot.setTicketId(generateTicketId(i+1, j+1));
+
+                    return slot.getTicketId();
                 }
             }
         }
@@ -84,6 +86,16 @@ public class ParkingLot {
                 Slot slot = slots.get(i).get(j);
                 if (Objects.isNull(slot.getVehicle()) && slot.getType().equals(type)) {
                     System.out.println("Floor: "+i+1+" - Slot: "+j+1);
+                }
+            }
+    }
+
+    public void displayOccupiedSlots(String type) {
+        for (int i= 0; i< slots.size(); i++)
+            for (int j= 0; j< slots.get(i).size(); j++) {
+                Slot slot = slots.get(i).get(j);
+                if (!Objects.isNull(slot)) {
+                    System.out.println("Occupied: Floor: "+i+1+" - Slot: "+j+1);
                 }
             }
     }
