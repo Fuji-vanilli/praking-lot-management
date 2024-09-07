@@ -2,6 +2,7 @@ package org.fuji.entities;
 
 import lombok.Data;
 
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -10,8 +11,8 @@ public class ParkingLot {
     private String parkingLotId;
     private List<List<Slot>> slots;
 
-    public ParkingLot(int numberFloors, int numberOfSlotPerFloor) {
-        this.parkingLotId= UUID.randomUUID().toString();
+    public ParkingLot(String parkingLotId, int numberFloors, int numberOfSlotPerFloor) {
+        this.parkingLotId= parkingLotId;
         this.slots= new ArrayList<>();
 
         for (int i= 0; i< numberFloors; i++) {
@@ -98,6 +99,8 @@ public class ParkingLot {
                     System.out.println("Occupied: Floor: "+i+1+" - Slot: "+j+1);
                 }
             }
+
+        System.out.println("All slot is free for the moment");
     }
 }
 
