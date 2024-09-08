@@ -2,7 +2,6 @@ package org.fuji.entities;
 
 import lombok.Data;
 
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -62,7 +61,7 @@ public class ParkingLot {
                     Slot slot = slots.get(i).get(j);
                     slot.setVehicle(null);
                     slot.setTicketId(null);
-                    System.out.println("Unparked vehicle successfully");
+                    System.out.println("Unpark vehicle successfully");
                 }
             }
         }
